@@ -10,6 +10,8 @@
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{ragged2e}
+\bibliographystyle{abntex2-alf}
+\bibliography{bib/bibliografia}
 
 \lstset{
     basicstyle=\ttfamily\small,
@@ -35,6 +37,7 @@
 
 %%%%%%%%%%%%%%%% PAGES STYLE %%%%%%%%%
 \usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
 \fancypagestyle{main}{
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead[RO]{\thepage}
@@ -99,8 +102,8 @@ ENGENHARIA DE COMPUTAÇÃO E ENGENHARIA MECATRÔNICA
 
 \vspace{3.6cm}
 
-{\bf{\large RELATÓRIO DA 1º EXPERIÊNCIA\\ % Pensar em como dividir entre os experimentos
-LEVANTAMENTO DA CURVA DO SENSOR\\
+{\bf{\large RELATÓRIO DA 1º UNIDADE\\ % Pensar em como dividir entre os experimentos
+LEVANTAMENTO DA CURVA DO SENSOR E MODELAGEM DINÂMICA DO SISTEMA DE TANQUES\\
 }}
 \vspace{1.5cm}
 {\large TURMA: 1\\
@@ -140,19 +143,22 @@ Virna Emanuelle Veloso Aguiar:: 20220025354\\
 
 \begin{center}
 \begin{normalsize}
-NOME COMPLETO 1º ALUNO: Nº MATRÍCULA\\
+Danilo Isamu Pereira Hikague: 20230072008\\
 \vspace{0.8cm}
-NOME COMPLETO 2º ALUNO: Nº MATRÍCULA\\
+Murilo de Lima Barros: 20250070735\\
 \vspace{0.8cm}
-NOME COMPLETO 3º ALUNO: Nº MATRÍCULA\\
+Rafael Cabral Melo: 20210080441\\
 \vspace{0.8cm}
-NOME COMPLETO 4º ALUNO: Nº MATRÍCULA\\
+Ramon Vinicius Ferreira de Souza: 20220017441\\
+\vspace{0.8cm}
+Virna Emanuelle Veloso Aguiar:: 20220025354\\
 
 \end{normalsize}
 \end{center}
 \vspace{3cm}
 
-{\bf{\large {\centering TÍTULO DA EXPERIÊNCIA\\}}}
+{\bf{\large {\centering LEVANTAMENTO DA CURVA DO SENSOR E MODELAGEM DINÂMICA DO SISTEMA DE TANQUES\\
+}}}
 
 \vspace{4cm}
 
@@ -197,21 +203,15 @@ Professor:  Fábio Meneghetti Ugulino de Araújo.
 
 \vspace{3cm}
 
+\vspace{\baselineskip}
+
 \begin{justify}
-
-\hspace{4ex}Trata-se da apresentação fiel, breve e concisa dos aspectos mais relevantes do
-trabalho, apresentando as ideias essenciais, na mesma progressão e no mesmo
-encadeamento que aparecem no texto. O resumo deve apresentar os objetivos, uma
-visão geral, ampla e, ao mesmo tempo, clara e objetiva do conteúdo do trabalho.\\
-\hspace{4ex}A norma da ABNT recomenda que se use de 150 a 500 palavras, em espaço
-simples, e deve-se usar o verbo na voz ativa e na terceira pessoa singular. Logo abaixo,
-devem ser colocadas as palavras-chave.\\
-
+\noindent Este trabalho apresenta a caracterização estática de instrumentação e a modelagem dinâmica de um sistema didático de tanques acoplados da Quanser\textregistered. O objetivo principal consiste em calibrar o sensor de nível e obter a função de transferência de primeira ordem da planta, fornecendo parâmetros consistentes para futuros projetos de controladores em malha fechada. Na primeira etapa, referente ao Experimento 1B, analisa-se a resposta do sensor piezorresistivo a partir de medições experimentais de tensão para cotas da lâmina d'água entre 5 e 25~cm. Aplica-se o Método dos Mínimos Quadrados sobre os dados coletados, determinando a curva de calibração linear, a sensibilidade estática e a tensão residual de \textit{offset}. Na segunda etapa, associada ao Experimento 1C, desenvolve-se a modelagem fenomenológica do sistema na Configuração 1, contemplando o tanque superior. Inicialmente, realiza-se o ensaio de enchimento com o orifício de descarga bloqueado sob degraus controlados de tensão, estimando a constante de fluxo da bomba hidráulica por meio de regressão linear da vazão volumétrica. Em seguida, formula-se o balanço de massa fundamentado na conservação volumétrica e no escoamento regido pela Lei de Torricelli, resultando em uma equação diferencial ordinária não linear. Executa-se a linearização da equação diferencial via expansão em Série de Taylor em torno do ponto de operação nominal de 15~cm, derivando a função de transferência de primeira ordem, o ganho estático e a constante de tempo do processo. Os resultados fornecem um modelo representativo e calibrado experimentalmente, assegurando a fundamentação quantitativa necessária para sínteses de controle e análises de estabilidade.
 \end{justify}
 
-\vspace{1.5cm}
+\vspace{\baselineskip}
 
-\textbf{Palavras-chave:}
+\noindent\textbf{Palavras-chave:} Sistemas de controle. Tanques acoplados. Calibração de sensores. Modelagem fenomenológica. Linearização.
 
 \newpage
 
@@ -288,28 +288,157 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \section{INTRODUÇÃO}
 
 \begin{justify}
-\hspace{4ex}A obtenção de modelos matemáticos quantitativos constitui uma etapa fundamental na solução e na análise de problemas de controle, sendo um requisito para que um sistema físico atenda a especificações de desempenho determinadas anteriormente. Para atuar corretamente sobre a dinâmica de uma planta, o sistema de controle deve ser capaz de interpretar as grandezas físicas envolvidas com precisão. Neste contexto, este relatório documenta a obtenção da curva de resposta do sensor de nível para um sistema de tanques acoplados da Quanser\textregistered.
+\hspace{4ex}A obtenção de modelos matemáticos quantitativos constitui uma etapa indispensável na engenharia de controle. Para que uma malha fechada atenda a requisitos rigorosos de estabilidade, amortecimento e erro em regime permanente, o projeto de controladores requer tanto a interpretação das variáveis de estado quanto a descrição matemática exata da dinâmica física da planta. Em sistemas de controle de processos industriais, como o controle de nível e vazão, a não linearidade do escoamento e a necessidade de transporte preciso impõem uma abordagem metodológica estruturada em duas frentes complementares: a calibração estática dos instrumentos de medição e a modelagem fenomenológica com  linearização da planta em torno de pontos de operação nominais.
 \end{justify}
 
 \begin{justify}
-\hspace{4ex}O sistema didático utilizado é composto por um reservatório, uma bomba, tubos flexíveis e dois tanques. Cada tanque é dotado de um sensor de nível que fornece um sinal elétrico de tensão proporcional à altura da coluna de líquido. O objetivo deste experimento é estabelecer a relação matemática direta entre a grandeza física medida (nível da água em centímetros) e o sinal elétrico lido pelo sistema de aquisição (tensão em \textit{volts}), calibração esta que é indispensável para as futuras estratégias de controle de nível.
+    \hspace{4ex}Nesse contexto, este relatório consolida os fundamentos e os resultados obtidos em duas práticas laboratoriais consecutivas realizadas na planta didática de tanques acoplados da Quanser\textregistered: a caracterização do sensor de nível, do Experimento 1B, e a modelagem matemática de primeira ordem do sistema de tanques acoplados, no Experimento 1C. A bancada experimental é composta por dois tanques cilíndricos de acrílico montados verticalmente sobre uma bacia de água, uma bomba acionada por motor de corrente contínua, sensores de nível de pressão em cada coluna e tubulações de interconexão. A interface entre a planta e o ambiente de controle em tempo real é intermediada por uma placa de aquisição de dados Quanser Q8-USB, um módulo de potência VoltPAQ-X1 com ganho de amplificação de tensão fixo de $3\times$ e o ambiente de \textit{software} MATLAB\textregistered/Simulink\textregistered\ integrado à ferramenta QUARC\textregistered.
+\end{justify}
+
+\begin{justify}
+\hspace{4ex}Dessa forma, o trabalho estrutura-se em duas etapas integradas. Inicialmente, no Experimento 1B, realiza-se a calibração estática do sensor de nível através de ensaios discretos de altura e tensão, definindo a curva de calibração e a sensibilidade do instrumento por regressão linear. Na sequência, o Experimento 1C aborda o levantamento paramétrico e a resposta temporal da planta operando com o tanque superior, contemplando a determinação da constante de vazão da bomba hidráulica e a dedução da função de transferência de primeira ordem linearizada em torno de um ponto de operação estático. A conjugação desses procedimentos estabelece a instrumentação calibrada e o modelo dinâmico essenciais para futuras estratégias de controle em malha fechada.
 \end{justify}
 
 \newpage
 
-%%%%%%%%%% REFERENCIAL TEÓRICO %%%%%%%
+\section{FUNDAMENTAÇÃO TEÓRICA}
 
-\thispagestyle{main}
+\subsection{Caracterização do Sensor de Nível (Experimento 1B)}
 
-\section{REFERENCIAL TEÓRICO} % Pendente (se formos fazer)
+\begin{justify}
+\hspace{4ex}A instrumentação de processos fundamenta-se na conversão de variáveis físicas em sinais elétricos, viabilizando o processamento digital por sistemas de aquisição. No sistema de tanques, a altura da lâmina d'água ($L$) é inferida a partir da pressão hidrostática exercida sobre um sensor piezorresistivo posicionado na base da coluna cilíndrica. Para variações moderadas de cota, a relação entre a tensão medida pelo sensor ($V$) e o nível físico ($L$) assume o comportamento estático linear descrito na Equação~\eqref{eq:sensor_linear}:
+\end{justify}
 
-Trata-se da apresentação do embasamento teórico sobre o qual se fundamentará
-o trabalho, ou seja, são os pressupostos que darão suporte à abordagem do trabalho.
-Lembrar de sempre que utilizar texto de outros lugares, utilizar citação da fonte, como por exemplo, \cite{LATEX04}.
+\begin{equation}
+    V(L) = K_s L + V_0
+    \label{eq:sensor_linear}
+\end{equation}
 
-\subsection{Seções}
+\noindent em que $K_s$ representa a sensibilidade estática do sensor ($\text{V/cm}$) e $V_0$ denota a tensão de \textit{offset} residual para tanque vazio ($L = 0\text{ cm}$).
 
-\subsubsection{Subseções}
+\begin{justify}
+\hspace{4ex}A determinação empírica desses coeficientes baseia-se no Método dos Mínimos Quadrados Ordinários (OLS). A partir de $N$ pares ordenados experimentais $(L_i, V_i)$, obtidos mediante ensaios estáticos repetidos ao longo de cotas pré-estabelecidas (5 a 25~cm), calculam-se os parâmetros ótimos de sensibilidade e \textit{offset} pelas Equações~\eqref{eq:ols_formula1} e~\eqref{eq:ols_formula2}, respectivamente:
+\end{justify}
+
+\begin{equation}
+    K_s = \frac{N \sum L_i V_i - \sum L_i \sum V_i}{N \sum L_i^2 - \left(\sum L_i\right)^2}
+    \label{eq:ols_formula1}
+\end{equation}
+
+\begin{equation}
+    V_0 = \frac{\sum V_i - K_s \sum L_i}{N}
+    \label{eq:ols_formula2}
+\end{equation}
+
+\noindent A calibração fornece a função inversa de medição $L(V) = (V - V_0)/K_s$, garantindo que as leituras nos experimentos dinâmicos subsequentes reflitam o nível em centímetros com precisão calibrada.
+
+\subsection{Modelagem Dinâmica da Coluna de Nível (Experimento 1C)}
+
+\subsubsection{Balanço Volumétrico e Modelo Não Linear}
+
+\begin{justify}
+\hspace{4ex}A dinâmica do nível no Tanque 1 (Configuração 1) é regida pelo princípio da conservação de massa para fluidos incompressíveis. Considerando a área transversal interna constante da base ($A_1$), a taxa de variação temporal do volume acumulado equivale à diferença entre a vazão afluente ($F_{in}$) e a vazão efluente ($F_{out}$), seguindo a Equação~\eqref{eq:balanco_massa}:
+\end{justify}
+
+\begin{equation}
+    A_1 \frac{dL_1(t)}{dt} = F_{in}(t) - F_{out}(t)
+    \label{eq:balanco_massa}
+\end{equation}
+
+\begin{justify}
+\hspace{4ex}A vazão fornecida pela bomba hidráulica acionada por motor DC é modelada como proporcional à tensão aplicada à sua armadura ($V_p$), conforme a Equação~\eqref{eq:vazao_entrada}:
+\end{justify}
+
+\begin{equation}
+    F_{in}(t) = K_m V_p(t)
+    \label{eq:vazao_entrada}
+\end{equation}
+
+\noindent onde $K_m$ é a constante de fluxo da bomba ($\text{cm}^3/\text{V}\cdot\text{s}$) e $V_p$ é a tensão amplificada pelo módulo de potência ($V_p = 3 \cdot V_{env}$, em que $V_{env}$ é a tensão enviada pelo \textit{software}).
+
+\begin{justify}
+\hspace{4ex}A efluência através do orifício na base do tanque decorre da conversão de energia potencial hidrostática em energia cinética. Pela Lei de Torricelli para escoamentos em orifícios submersos de área $a_1$, a vazão de saída é expressa pela Equação~\eqref{eq:vazao_saida}:
+\end{justify}
+
+\begin{equation}
+    F_{out}(t) = a_1 \sqrt{2g L_1(t)}
+    \label{eq:vazao_saida}
+\end{equation}
+
+\begin{justify}
+\noindent sendo $g$ a aceleração da gravidade local ($981\text{ cm/s}^2$) e $a_1 = \pi d_1^2 / 4$ a área do orifício de diâmetro $d_1$. Substituindo \eqref{eq:vazao_entrada} e \eqref{eq:vazao_saida} em \eqref{eq:balanco_massa}, obtém-se a equação diferencial ordinária não linear da planta na Equação~\eqref{eq:edo_nao_linear}:
+\end{justify}
+
+\begin{equation}
+    \frac{dL_1(t)}{dt} = \frac{K_m}{A_1} V_p(t) - \frac{a_1}{A_1} \sqrt{2g L_1(t)}
+    \label{eq:edo_nao_linear}
+\end{equation}
+
+\subsubsection{Identificação Paramétrica de $K_m$}
+
+\begin{justify}
+\hspace{4ex}Para isolar e estimar $K_m$, o orifício de saída do Tanque 1 é bloqueado ($a_1 = 0 \implies F_{out} = 0$). Sob degraus constantes de tensão na bomba ($V_p$), a Equação~\eqref{eq:edo_nao_linear} reduz-se a um integrador puro, conforme a Equação~\eqref{eq:enchimento}:
+\end{justify}
+
+\begin{equation}
+    A_1 \frac{\Delta L_1}{\Delta t} = K_m V_p \implies F_{in} = K_m V_p
+    \label{eq:enchimento}
+\end{equation}
+
+\begin{justify}
+\hspace{4ex}Medindo-se o tempo decorrido $\Delta t$ para o enchimento da coluna até uma cota fixa ($L_{1} = 25\text{ cm}$), calcula-se a vazão experimental correspondente por $F_{in} = (A_1 \cdot 25)/\Delta t$. O parâmetro $K_m$ é determinado ajustando-se linearmente o conjunto de pontos $(V_p, F_{in})$ pelo Método dos Mínimos Quadrados.
+\end{justify}
+
+\subsubsection{Linearização e Função de Transferência}
+
+\begin{justify}
+\hspace{4ex}Devido à não linearidade introduzida pelo termo $\sqrt{L_1}$, aplica-se a expansão em Série de Taylor em torno de um ponto de operação estático nominal $(L_0, V_{p0})$ definido em regime permanente ($\dot{L}_1 = 0$), expresso pela Equação~\eqref{eq:equilibrio}:
+\end{justify}
+
+\begin{equation}
+    F_{in0} = F_{out0} \implies K_m V_{p0} = a_1 \sqrt{2g L_0}
+    \label{eq:equilibrio}
+\end{equation}
+
+\begin{justify}
+\hspace{4ex}Aproximando $\sqrt{L_1}$ em primeira ordem em torno de $L_0$, obtém-se a relação da Equação~\eqref{eq:taylor}:
+\end{justify}
+
+\begin{equation}
+    \sqrt{L_1} \approx \sqrt{L_0} + \left. \frac{d(\sqrt{L_1})}{dL_1} \right|_{L_0} (L_1 - L_0) = \sqrt{L_0} + \frac{1}{2\sqrt{L_0}} \tilde{L}_1
+    \label{eq:taylor}
+\end{equation}
+
+\begin{justify}
+\noindent definindo as variáveis incrementais de desvio $\tilde{L}_1(t) = L_1(t) - L_0$ e $\tilde{V}_p(t) = V_p(t) - V_{p0}$. Substituindo \eqref{eq:taylor} em \eqref{eq:edo_nao_linear} e cancelando os termos de equilíbrio, resulta a dinâmica linearizada na Equação~\eqref{eq:edo_linear}:
+\end{justify}
+
+\begin{equation}
+    \frac{d\tilde{L}_1(t)}{dt} + \left( \frac{a_1 \sqrt{2g}}{2 A_1 \sqrt{L_0}} \right) \tilde{L}_1(t) = \frac{K_m}{A_1} \tilde{V}_p(t)
+    \label{eq:edo_linear}
+\end{equation}
+
+\begin{justify}
+\hspace{4ex}Aplicando a Transformada de Laplace sob condições iniciais nulas, obtém-se a função de transferência de primeira ordem do sistema na Equação~\eqref{eq:funcao_transferencia}:
+\end{justify}
+
+\begin{equation}
+    G(s) = \frac{\tilde{L}_1(s)}{\tilde{V}_p(s)} = \frac{K_{dc}}{\tau s + 1}
+    \label{eq:funcao_transferencia}
+\end{equation}
+
+\begin{justify}
+\noindent cujos parâmetros constitutivos, constante de tempo $\tau$ e ganho estático $K_{dc}$, são definidos na Equação~\eqref{eq:parametros_planta}:
+\end{justify}
+
+\begin{equation}
+    \tau = \frac{2 A_1 \sqrt{L_0}}{a_1 \sqrt{2g}}, \qquad K_{dc} = \frac{2 K_m \sqrt{L_0}}{a_1 \sqrt{2g}}
+    \label{eq:parametros_planta}
+\end{equation}
+
+\begin{justify}
+\noindent Esse modelo quantitativo linearizado em torno de $L_0 = 15\text{ cm}$ fornece o suporte analítico fundamental para projetos de controladores e análises de estabilidade via Lugar Geométrico das Raízes (LGR).
+\end{justify}
 
 \newpage
 
@@ -319,12 +448,14 @@ Lembrar de sempre que utilizar texto de outros lugares, utilizar citação da fo
 
 \section{METODOLOGIA}
 
+\subsection{Caracterização do Sensor de Nível (Experimento 1B)}
+
 \begin{justify}
     \hspace{4ex}O experimento foi conduzido utilizando a bancada do sistema de tanques acoplados da Quanser\textregistered. O aparato físico foi integrado a um microcomputador operando com Windows, munido dos softwares MATLAB\textregistered/SIMULINK\textregistered  e QUARC\textregistered, que formam o ambiente de simulação e controle. O interfaceamento entre a planta física e o microcomputador foi realizado por meio de uma placa de aquisição de dados Q8-USB e do módulo de potência VoltPAQ-X1\textregistered.
 \end{justify}
 
 \begin{justify}
-    \hspace{4ex}A prática, designada como experimento 1.B., consistiu no levantamento de dados estáticos para a modelagem do sensor de nível. O procedimento foi executado estabelecendo-se diferentes volumes de líquido no tanque 1, de forma a registrar a tensão elétrica fornecida pelo sensor em cinco alturas pré-determinadas: 5, 10, 15, 20 e 25 cm.
+    \hspace{4ex}A prática, designada como experimento 1.B., consistiu no levantamento de dados estáticos para a modelagem do sensor de nível. O procedimento foi executado estabelecendo-se diferentes volumes de líquido no tanque 1, de forma a registrar a tensão elétrica fornecida pelo sensor em cinco alturas pré-determinadas: 5, 10, 15, 20 e 25~cm.
 \end{justify}
 
 \begin{justify}
@@ -409,6 +540,8 @@ if __name__ == "__main__":
 \thispagestyle{main}
 
 \section{RESULTADOS}
+
+\subsection{Experimento 1B}
 
 \begin{justify}
     \hspace{4ex}Os valores de tensão obtidos nas 6 medições para os cinco valores de altura da coluna de água ($h = 5, 10, 15, 20, 25\text{ cm}$) estão consolidados na Tabela~\ref{tab:dados_laboratorio}, acompanhados das respectivas médias aritméticas calculadas para cada ponto estático.
