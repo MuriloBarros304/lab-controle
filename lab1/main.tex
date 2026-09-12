@@ -306,7 +306,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \subsection{Caracterização do Sensor de Nível (Experimento 1B)}
 
 \begin{justify}
-\hspace{4ex}A instrumentação de processos fundamenta-se na conversão de variáveis físicas em sinais elétricos, viabilizando o processamento digital por sistemas de aquisição. No sistema de tanques, a altura da lâmina d'água ($L$) é inferida a partir da pressão hidrostática exercida sobre um sensor piezorresistivo posicionado na base da coluna cilíndrica. Para variações moderadas de cota, a relação entre a tensão medida pelo sensor ($V$) e o nível físico ($L$) assume o comportamento estático linear descrito na Equação~\eqref{eq:sensor_linear}:
+\hspace{4ex}A instrumentação de processos fundamenta-se na conversão de variáveis físicas em sinais elétricos, viabilizando o processamento digital por sistemas de aquisição. No sistema de tanques, a altura da lâmina d'água ($L$) é inferida a partir da pressão hidrostática exercida sobre um sensor piezorresistivo posicionado na base da coluna cilíndrica. Para variações moderadas de cota, a relação entre a tensão medida pelo sensor ($V$) e o nível físico ($L$) assume o comportamento estático linear descrito na Equação~\eqref{eq:sensor_linear}.
 \end{justify}
 
 \begin{equation}
@@ -317,18 +317,16 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \noindent em que $K_s$ representa a sensibilidade estática do sensor ($\text{V/cm}$) e $V_0$ denota a tensão de \textit{offset} residual para tanque vazio ($L = 0\text{ cm}$).
 
 \begin{justify}
-\hspace{4ex}A determinação empírica desses coeficientes baseia-se no Método dos Mínimos Quadrados Ordinários (OLS). A partir de $N$ pares ordenados experimentais $(L_i, V_i)$, obtidos mediante ensaios estáticos repetidos ao longo de cotas pré-estabelecidas (5 a 25~cm), calculam-se os parâmetros ótimos de sensibilidade e \textit{offset} pelas Equações~\eqref{eq:ols_formula1} e~\eqref{eq:ols_formula2}, respectivamente:
+\hspace{4ex}A determinação empírica desses coeficientes baseia-se no Método dos Mínimos Quadrados Ordinários (OLS). A partir de $N$ pares ordenados experimentais $(L_i, V_i)$, obtidos mediante ensaios estáticos repetidos ao longo de cotas pré-estabelecidas (5 a 25~cm), calculam-se os parâmetros ótimos pelas relações da Equação~\eqref{eq:ols_formulas}.
 \end{justify}
 
 \begin{equation}
-    K_s = \frac{N \sum L_i V_i - \sum L_i \sum V_i}{N \sum L_i^2 - \left(\sum L_i\right)^2}
-    \label{eq:ols_formula1}
+    K_s = \frac{N \sum L_i V_i - \sum L_i \sum V_i}{N \sum L_i^2 - \left(\sum L_i\right)^2}, \qquad
+    V_0 = \frac{\sum V_i - K_s \sum L_i}{N}
+    \label{eq:ols_formulas}
 \end{equation}
 
-\begin{equation}
-    V_0 = \frac{\sum V_i - K_s \sum L_i}{N}
-    \label{eq:ols_formula2}
-\end{equation}
+\noindent A calibração fornece a função inversa de medição $L(V) = (V - V_0)/K_s$, garantindo que as leituras nos experimentos dinâmicos subsequentes reflitam o nível em centímetros com precisão calibrada.
 
 \noindent A calibração fornece a função inversa de medição $L(V) = (V - V_0)/K_s$, garantindo que as leituras nos experimentos dinâmicos subsequentes reflitam o nível em centímetros com precisão calibrada.
 
@@ -337,7 +335,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \subsubsection{Balanço Volumétrico e Modelo Não Linear}
 
 \begin{justify}
-\hspace{4ex}A dinâmica do nível no Tanque 1 (Configuração 1) é regida pelo princípio da conservação de massa para fluidos incompressíveis. Considerando a área transversal interna constante da base ($A_1$), a taxa de variação temporal do volume acumulado equivale à diferença entre a vazão afluente ($F_{in}$) e a vazão efluente ($F_{out}$), seguindo a Equação~\eqref{eq:balanco_massa}:
+\hspace{4ex}A dinâmica do nível no Tanque 1 (Configuração 1) é regida pelo princípio da conservação de massa para fluidos incompressíveis. Considerando a área transversal interna constante da base ($A_1$), a taxa de variação temporal do volume acumulado equivale à diferença entre a vazão afluente ($F_{in}$) e a vazão efluente ($F_{out}$), seguindo a Equação~\eqref{eq:balanco_massa}.
 \end{justify}
 
 \begin{equation}
@@ -346,7 +344,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \end{equation}
 
 \begin{justify}
-\hspace{4ex}A vazão fornecida pela bomba hidráulica acionada por motor DC é modelada como proporcional à tensão aplicada à sua armadura ($V_p$), conforme a Equação~\eqref{eq:vazao_entrada}:
+\hspace{4ex}A vazão fornecida pela bomba hidráulica acionada por motor DC é modelada como proporcional à tensão aplicada à sua armadura ($V_p$), conforme a Equação~\eqref{eq:vazao_entrada}.
 \end{justify}
 
 \begin{equation}
@@ -357,7 +355,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \noindent onde $K_m$ é a constante de fluxo da bomba ($\text{cm}^3/\text{V}\cdot\text{s}$) e $V_p$ é a tensão amplificada pelo módulo de potência ($V_p = 3 \cdot V_{env}$, em que $V_{env}$ é a tensão enviada pelo \textit{software}).
 
 \begin{justify}
-\hspace{4ex}A efluência através do orifício na base do tanque decorre da conversão de energia potencial hidrostática em energia cinética. Pela Lei de Torricelli para escoamentos em orifícios submersos de área $a_1$, a vazão de saída é expressa pela Equação~\eqref{eq:vazao_saida}:
+\hspace{4ex}A efluência através do orifício na base do tanque decorre da conversão de energia potencial hidrostática em energia cinética. Pela Lei de Torricelli para escoamentos em orifícios submersos de área $a_1$, a vazão de saída é expressa pela Equação~\eqref{eq:vazao_saida}.
 \end{justify}
 
 \begin{equation}
@@ -366,7 +364,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \end{equation}
 
 \begin{justify}
-\noindent sendo $g$ a aceleração da gravidade local ($981\text{ cm/s}^2$) e $a_1 = \pi d_1^2 / 4$ a área do orifício de diâmetro $d_1$. Substituindo \eqref{eq:vazao_entrada} e \eqref{eq:vazao_saida} em \eqref{eq:balanco_massa}, obtém-se a equação diferencial ordinária não linear da planta na Equação~\eqref{eq:edo_nao_linear}:
+\noindent sendo $g$ a aceleração da gravidade local ($981\text{ cm/s}^2$) e $a_1 = \pi d_1^2 / 4$ a área do orifício de diâmetro $d_1$. Substituindo \eqref{eq:vazao_entrada} e \eqref{eq:vazao_saida} em \eqref{eq:balanco_massa}, obtém-se a equação diferencial ordinária não linear da planta na Equação~\eqref{eq:edo_nao_linear}.
 \end{justify}
 
 \begin{equation}
@@ -377,7 +375,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \subsubsection{Identificação Paramétrica de $K_m$}
 
 \begin{justify}
-\hspace{4ex}Para isolar e estimar $K_m$, o orifício de saída do Tanque 1 é bloqueado ($a_1 = 0 \implies F_{out} = 0$). Sob degraus constantes de tensão na bomba ($V_p$), a Equação~\eqref{eq:edo_nao_linear} reduz-se a um integrador puro, conforme a Equação~\eqref{eq:enchimento}:
+\hspace{4ex}Para isolar e estimar $K_m$, o orifício de saída do Tanque 1 é bloqueado ($a_1 = 0 \implies F_{out} = 0$). Sob degraus constantes de tensão na bomba ($V_p$), a Equação~\eqref{eq:edo_nao_linear} reduz-se a um integrador puro, conforme a Equação~\eqref{eq:enchimento}.
 \end{justify}
 
 \begin{equation}
@@ -392,7 +390,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \subsubsection{Linearização e Função de Transferência}
 
 \begin{justify}
-\hspace{4ex}Devido à não linearidade introduzida pelo termo $\sqrt{L_1}$, aplica-se a expansão em Série de Taylor em torno de um ponto de operação estático nominal $(L_0, V_{p0})$ definido em regime permanente ($\dot{L}_1 = 0$), expresso pela Equação~\eqref{eq:equilibrio}:
+\hspace{4ex}Devido à não linearidade introduzida pelo termo $\sqrt{L_1}$, aplica-se a expansão em Série de Taylor em torno de um ponto de operação estático nominal $(L_0, V_{p0})$ definido em regime permanente ($\dot{L}_1 = 0$), expresso pela Equação~\eqref{eq:equilibrio}.
 \end{justify}
 
 \begin{equation}
@@ -401,7 +399,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \end{equation}
 
 \begin{justify}
-\hspace{4ex}Aproximando $\sqrt{L_1}$ em primeira ordem em torno de $L_0$, obtém-se a relação da Equação~\eqref{eq:taylor}:
+\hspace{4ex}Aproximando $\sqrt{L_1}$ em primeira ordem em torno de $L_0$, obtém-se a relação da Equação~\eqref{eq:taylor}.
 \end{justify}
 
 \begin{equation}
@@ -410,7 +408,7 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \end{equation}
 
 \begin{justify}
-\noindent definindo as variáveis incrementais de desvio $\tilde{L}_1(t) = L_1(t) - L_0$ e $\tilde{V}_p(t) = V_p(t) - V_{p0}$. Substituindo \eqref{eq:taylor} em \eqref{eq:edo_nao_linear} e cancelando os termos de equilíbrio, resulta a dinâmica linearizada na Equação~\eqref{eq:edo_linear}:
+\noindent definindo as variáveis incrementais de desvio $\tilde{L}_1(t) = L_1(t) - L_0$ e $\tilde{V}_p(t) = V_p(t) - V_{p0}$. Substituindo \eqref{eq:taylor} em \eqref{eq:edo_nao_linear} e cancelando os termos de equilíbrio, resulta a dinâmica linearizada na Equação~\eqref{eq:edo_linear}.
 \end{justify}
 
 \begin{equation}
