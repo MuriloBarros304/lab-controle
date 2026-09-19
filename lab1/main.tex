@@ -73,12 +73,12 @@ hidelinks]{hyperref}
 \centering
 
 \subfloat{
-\includegraphics[width=2.7cm]{UFRN.eps}
+\includegraphics[width=2.7cm]{img/UFRN-eps-converted-to.pdf}
 \label{UFRN Logo}
 }
 \hspace{11.09cm}
 \subfloat{
-\includegraphics[width=2.4cm]{DCA.eps}
+\includegraphics[width=2.4cm]{img/DCA-eps-converted-to.pdf}
 \label{DCA Logo}
 }
 
@@ -122,7 +122,7 @@ Rafael Cabral Melo: 20210080441\\
 \vspace{0.8cm}
 Ramon Vinicius Ferreira de Souza: 20220017441\\
 \vspace{0.8cm}
-Virna Emanuelle Veloso Aguiar:: 20220025354\\ 
+Virna Emanuelle Veloso Aguiar:: 20220025354\\
 \end{normalsize}
 \end{flushright}
 
@@ -216,49 +216,49 @@ Professor:  Fábio Meneghetti Ugulino de Araújo.
 
 %%%%%%%%%%%%%%%  LISTA DE SÍMBOLOS %%%
 
-\thispagestyle{empty}
-
-\begin{center}
-{\large \textbf{LISTA DE SÍMBOLOS}}
-\end{center}
-
-\vspace{3cm}
-
-\begin{tabular}{ l l }
-A\hspace{1.5cm} & Matriz triangular superior com diagonal unitária.\\
-\phantom{a} & \phantom{a}\\
-D\hspace{1.5cm} & Matriz diagonal obtida a partir de $W^{T}W$\\
-\phantom{a} & \phantom{a}\\
-$\theta$\hspace{1.5cm} & Vetor de parâmetros.\\
-\phantom{a} & \phantom{a}\\
-$\Xi$\hspace{1.5cm} & Vetor de resíduos de modelagem.\\
-\phantom{a} & \phantom{a}\\
-d\hspace{1.5cm} & Tempo de retardo de um sistema ou tempo morto.\\
-\phantom{a} & \phantom{a}\\
-e(k)\hspace{1.5cm} & Resíduo (Erro de Estimação mais o Ruído).\\
-\end{tabular}
-
-\newpage
+% \thispagestyle{empty}
+%
+% \begin{center}
+% {\large \textbf{LISTA DE SÍMBOLOS}}
+% \end{center}
+%
+% \vspace{3cm}
+%
+% \begin{tabular}{ l l }
+% A\hspace{1.5cm} & Matriz triangular superior com diagonal unitária.\\
+% \phantom{a} & \phantom{a}\\
+% D\hspace{1.5cm} & Matriz diagonal obtida a partir de $W^{T}W$\\
+% \phantom{a} & \phantom{a}\\
+% $\theta$\hspace{1.5cm} & Vetor de parâmetros.\\
+% \phantom{a} & \phantom{a}\\
+% $\Xi$\hspace{1.5cm} & Vetor de resíduos de modelagem.\\
+% \phantom{a} & \phantom{a}\\
+% d\hspace{1.5cm} & Tempo de retardo de um sistema ou tempo morto.\\
+% \phantom{a} & \phantom{a}\\
+% e(k)\hspace{1.5cm} & Resíduo (Erro de Estimação mais o Ruído).\\
+% \end{tabular}
+%
+% \newpage
 
 %%%% LISTA DE ABREVIATURAS E SIGLAS %%
 
-\thispagestyle{empty}
-
-\begin{center}
-{\large \textbf{LISTA DE ABREVIATURAS E SIGLAS}}
-\end{center}
-
-\vspace{3cm}
-
-\begin{tabular}{ l l }
-ARX\hspace{1.5cm} & Matriz triangular superior com diagonal unitária.\\
-ARMAX\hspace{1.5cm} & Matriz diagonal obtida a partir de $W^{T}W$\\
-NARX\hspace{1.5cm}&Vetor de parâmetros.\\
-NARMAX\hspace{1.5cm}&Vetor de resíduos de modelagem.\\
-MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
-\end{tabular}
-
-\newpage
+% \thispagestyle{empty}
+%
+% \begin{center}
+% {\large \textbf{LISTA DE ABREVIATURAS E SIGLAS}}
+% \end{center}
+%
+% \vspace{3cm}
+%
+% \begin{tabular}{ l l }
+% ARX\hspace{1.5cm} & Matriz triangular superior com diagonal unitária.\\
+% ARMAX\hspace{1.5cm} & Matriz diagonal obtida a partir de $W^{T}W$\\
+% NARX\hspace{1.5cm}&Vetor de parâmetros.\\
+% NARMAX\hspace{1.5cm}&Vetor de resíduos de modelagem.\\
+% MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
+% \end{tabular}
+%
+% \newpage
 
 %%%%%%%%% LISTA DE FIGURAS %%%%%%%%%%%
 
@@ -291,14 +291,21 @@ MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
 \end{justify}
 
 \begin{justify}
-    \hspace{4ex}Nesse contexto, este relatório consolida os fundamentos e os resultados obtidos em duas práticas laboratoriais consecutivas realizadas na planta didática de tanques acoplados da Quanser\textsuperscript{\textregistered}: a caracterização do sensor de nível, do Experimento 1B, e a modelagem matemática de primeira ordem do sistema de tanques acoplados, no Experimento 1C. A bancada experimental é composta por dois tanques cilíndricos de acrílico montados verticalmente sobre uma bacia de água, uma bomba acionada por motor de corrente contínua, sensores de nível de pressão em cada coluna e tubulações de interconexão. A interface entre a planta e o ambiente de controle em tempo real é intermediada por uma placa de aquisição de dados Quanser Q8-USB, um módulo de potência VoltPAQ-X1 com ganho de amplificação de tensão fixo de $3\times$ e o ambiente de \textit{software} MATLAB\textsuperscript{\textregistered}/Simulink\textsuperscript{\textregistered}\ integrado à ferramenta QUARC\textsuperscript{\textregistered}.
+    \hspace{4ex}Nesse contexto, este relatório consolida os fundamentos e os resultados obtidos em duas práticas laboratoriais consecutivas realizadas na planta didática de tanques acoplados da Quanser\textsuperscript{\textregistered}: a caracterização do sensor de nível, do Experimento 1B, e a modelagem matemática de primeira ordem do sistema de tanques acoplados, no Experimento 1C. A bancada experimental é composta por dois tanques cilíndricos de acrílico montados verticalmente sobre uma bacia de água, uma bomba acionada por motor de corrente contínua, sensores de nível de pressão em cada coluna e tubulações de interconexão, de acordo com a Figura~\ref{fig:tanques}. A interface entre a planta e o ambiente de controle em tempo real é intermediada por uma placa de aquisição de dados Quanser Q8-USB, um módulo de potência VoltPAQ-X1 com ganho de amplificação de tensão fixo de $3\times$ e o ambiente de \textit{software} MATLAB\textsuperscript{\textregistered}/Simulink\textsuperscript{\textregistered}\ integrado à ferramenta QUARC\textsuperscript{\textregistered}.
 \end{justify}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/diagram.png}
+    \caption{Esquemático da configuração dos tanques.}
+    \label{fig:tanques}
+\end{figure}
 
 \begin{justify}
     \hspace{4ex}Dessa forma, o trabalho estrutura-se em duas etapas integradas. Inicialmente, no Experimento 1B, realiza-se a calibração estática do sensor de nível através de ensaios discretos de altura e tensão, definindo a curva de calibração e a sensibilidade do instrumento por regressão linear. Na sequência, o Experimento 1C aborda o levantamento paramétrico e a resposta temporal da planta operando com o tanque superior, contemplando a determinação da constante de vazão da bomba hidráulica e a dedução da função de transferência de primeira ordem linearizada em torno de um ponto de operação estático. A conjugação desses procedimentos estabelece a instrumentação calibrada e o modelo dinâmico essenciais para futuras estratégias de controle em malha fechada.
 \end{justify}
 
-\subsection{Introdução ao MATLAB®, Simulink® e QUARC® (Experimento 1A)}
+\subsection{Introdução ao MATLAB\textsuperscript{\textregistered}, Simulink\textsuperscript{\textregistered} e QUARC\textsuperscript{\textregistered} (Experimento 1A)}
 
 \begin{justify}
     \hspace{4ex} O MATLAB\textsuperscript{\textregistered}\space (MATrix LABoratory) é uma plataforma de computação numérica e IDE (ambiente de desenvolvimento integrado) para engenharia e aplicações científicas, como análise de dados, processamento de sinais e imagens, sistemas de controle, comunicações sem fio e robótica. O MATLAB\textsuperscript{\textregistered}\space inclui uma linguagem de programação, aplicativos interativos, bibliotecas altamente especializadas e ferramentas para gerar automaticamente código incorporado, tendo como principais elementos de interface a  Janela de Comandos (\textit{Command Window}), a Área de Trabalho (\textit{Workspace}) e a Janela de Scripts. 
