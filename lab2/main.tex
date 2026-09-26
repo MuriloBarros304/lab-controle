@@ -1,0 +1,361 @@
+%%%%%%%%%%%% STRUCTURE %%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{ragged2e}
+\usepackage{float}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    commentstyle=\color{gray}\itshape,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    rulecolor=\color{black!20},
+    tabsize=4,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% PAGES STYLE %%%%%%%%%
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\fancypagestyle{main}{
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[RO]{\thepage}
+\fancyfoot[CO]{}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{subfig}
+\usepackage{mathptmx}
+\usepackage{changepage}
+%\usepackage[alf]{abntex2cite}
+
+%%%%%%%%%%% PDF METADATA %%%%%%%%%%%%%
+\usepackage[ pdftitle={RELATÓRIO SISTEMAS DE CONTROLE},
+pdfsubject={LABORATÓRIO DE CONTROLE},
+pdfkeywords={Controle,Automação,UFRN,DCA},
+hidelinks]{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\onehalfspacing
+
+\thispagestyle{empty}
+
+\setcounter{page}{1}
+
+%%%%%%%%%%%% LOGOS %%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[!ht]
+
+\centering
+
+\subfloat{
+\includegraphics[width=2.7cm]{img/UFRN-eps-converted-to.pdf}
+\label{UFRN Logo}
+}
+\hspace{11.09cm}
+\subfloat{
+\includegraphics[width=2.4cm]{img/DCA-eps-converted-to.pdf}
+\label{DCA Logo}
+}
+
+%\caption{}
+\label{Logos}
+
+\end{figure}
+
+%%%%%%%%%%%%%%% CAPA %%%%%%%%%%%%%%%%%
+
+\vspace{-1cm}
+
+\begin{center}
+{\bf{\normalsize UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE\\
+CENTRO DE TECNOLOGIA\\
+DEPARTAMENTO DE ENGENHARIA DE COMPUTAÇÃO E AUTOMAÇÃO\\
+ENGENHARIA DE COMPUTAÇÃO E ENGENHARIA MECATRÔNICA
+}}
+
+
+\vspace{3.6cm}
+
+{\bf{\large RELATÓRIO DA 2º UNIDADE\\
+PROJETO DE CONTROLADORES PROPORCIONAL, PROPORCIONAL-DERIVATIVO, PROPORCIONAL-INTEGRATIVO E PROPORCIONAL-INTEGRATIVO-DERIVATIVO\\
+}}
+\vspace{1.5cm}
+{\large TURMA: 1\\
+	GRUPO 20262G4T1}
+
+\vspace{3.6cm}
+
+
+
+\begin{flushright}
+\begin{normalsize}
+Danilo Isamu Pereira Hikague: 20230072008\\
+\vspace{0.8cm}
+Murilo de Lima Barros: 20250070735\\
+\vspace{0.8cm}
+Rafael Cabral Melo: 20210080441\\
+\vspace{0.8cm}
+Ramon Vinicius Ferreira de Souza: 20220017441\\
+\vspace{0.8cm}
+Virna Emanuelle Veloso Aguiar:: 20220025354\\
+\end{normalsize}
+\end{flushright}
+
+
+\vspace{2.5cm}
+
+{\large Natal-RN\\
+2026}
+
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%  CONTRA-CAPA %%%%%%%%%
+
+\thispagestyle{empty}
+
+\begin{center}
+\begin{normalsize}
+Danilo Isamu Pereira Hikague: 20230072008\\
+\vspace{0.8cm}
+Murilo de Lima Barros: 20250070735\\
+\vspace{0.8cm}
+Rafael Cabral Melo: 20210080441\\
+\vspace{0.8cm}
+Ramon Vinicius Ferreira de Souza: 20220017441\\
+\vspace{0.8cm}
+Virna Emanuelle Veloso Aguiar:: 20220025354\\
+
+\end{normalsize}
+\end{center}
+\vspace{3cm}
+
+{\bf{\large {\centering PROJETO DE CONTROLADORES PROPORCIONAL, PROPORCIONAL-DERIVATIVO, PROPORCIONAL-INTEGRATIVO E PROPORCIONAL-INTEGRATIVO-DERIVATIVO\\
+}}}
+
+\vspace{4cm}
+
+\begin{adjustwidth}{7.5cm}{0cm}
+
+{\normalsize
+
+Segundo Relatório Parcial apresentado à disciplina de
+Projeto de Sistemas de Controle - Laboratório, correspondente à
+avaliação da 2º unidade do semestre 2026.2 do 7º período
+dos cursos: Engenharia de Computação e Engenharia Mecatrônica da
+Universidade Federal do Rio Grande do Norte, sob
+orientação do {\bf Prof. Fábio Meneghetti Ugulino de
+Araújo.}
+
+}
+
+\end{adjustwidth}
+
+\vspace{2cm}
+
+\begin{center}
+
+Professor:  Fábio Meneghetti Ugulino de Araújo.
+
+\vspace{2.5cm}
+
+{\large Natal-RN\\
+2026}
+
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%  RESUMO %%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+
+\begin{center}
+{\large \textbf{RESUMO}}
+\end{center}
+
+\vspace{3cm}
+
+\vspace{\baselineskip}
+
+\begin{justify}
+    Resumo
+\end{justify}
+
+\vspace{\baselineskip}
+
+\noindent\textbf{Palavras-chave:} Sistemas de controle. Tanques acoplados. Calibração de sensores. PID.
+
+\newpage
+
+%%%%%%%%%%%%%%%  LISTA DE SÍMBOLOS %%%
+
+% \thispagestyle{empty}
+%
+% \begin{center}
+% {\large \textbf{LISTA DE SÍMBOLOS}}
+% \end{center}
+%
+% \vspace{3cm}
+%
+% \begin{tabular}{ l l }
+% A\hspace{1.5cm} & Matriz triangular superior com diagonal unitária.\\
+% \phantom{a} & \phantom{a}\\
+% D\hspace{1.5cm} & Matriz diagonal obtida a partir de $W^{T}W$\\
+% \phantom{a} & \phantom{a}\\
+% $\theta$\hspace{1.5cm} & Vetor de parâmetros.\\
+% \phantom{a} & \phantom{a}\\
+% $\Xi$\hspace{1.5cm} & Vetor de resíduos de modelagem.\\
+% \phantom{a} & \phantom{a}\\
+% d\hspace{1.5cm} & Tempo de retardo de um sistema ou tempo morto.\\
+% \phantom{a} & \phantom{a}\\
+% e(k)\hspace{1.5cm} & Resíduo (Erro de Estimação mais o Ruído).\\
+% \end{tabular}
+%
+% \newpage
+
+%%%% LISTA DE ABREVIATURAS E SIGLAS %%
+
+% \thispagestyle{empty}
+%
+% \begin{center}
+% {\large \textbf{LISTA DE ABREVIATURAS E SIGLAS}}
+% \end{center}
+%
+% \vspace{3cm}
+%
+% \begin{tabular}{ l l }
+% ARX\hspace{1.5cm} & Matriz triangular superior com diagonal unitária.\\
+% ARMAX\hspace{1.5cm} & Matriz diagonal obtida a partir de $W^{T}W$\\
+% NARX\hspace{1.5cm}&Vetor de parâmetros.\\
+% NARMAX\hspace{1.5cm}&Vetor de resíduos de modelagem.\\
+% MQ\hspace{1.5cm}&Tempo de retardo de um sistema ou tempo morto.\\
+% \end{tabular}
+%
+% \newpage
+
+%%%%%%%%% LISTA DE FIGURAS %%%%%%%%%%%
+
+\thispagestyle{empty}
+
+\begin{center}
+\listoffigures
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%% SUMÁRIO %%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+
+\begin{center}
+\tableofcontents
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%% INTRODUÇÃO %%%%%%%%%%%
+
+\thispagestyle{main}
+
+\section{INTRODUÇÃO}
+
+\begin{justify}
+    Introdução
+\end{justify}
+
+\newpage
+
+%%%%%%% FUNDAMENTAÇÃO TEÓRICA %%%%%%%
+
+\section{FUNDAMENTAÇÃO TEÓRICA}
+
+\subsection{(Experimento 2A)}
+
+\begin{justify}
+    Experimento 2A
+\end{justify}
+
+\newpage
+
+%%%%%%%%%% METODOLOGIA %%%%%%%%%%%%%%%
+
+\thispagestyle{main}
+
+\section{METODOLOGIA}
+
+\begin{justify}
+    Metodologia
+\end{justify}
+
+\newpage
+
+%%%%%%%%%% RESULTADOS %%%%%%%%%%%%%%%
+
+\thispagestyle{main}
+
+\section{RESULTADOS}
+
+\subsection{Experimento 2A}
+
+\begin{justify}
+    Resultados
+\end{justify}
+
+\newpage
+
+%%%%%%%%%% CONCLUSÃO %%%%%%%%%%%%%%%
+
+\thispagestyle{main}
+
+\section{CONCLUSÃO}
+
+\begin{justify}
+    Conclusão
+\end{justify}
+
+\newpage
+
+%%%%%%%% REFERÊNCIAS %%%%%%%%%%%%%%%%%
+
+%\newpage
+\phantomsection
+\addcontentsline{toc}{section}{REFERÊNCIAS}
+
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{bib/bibliografia}
+
+\newpage
+\appendix
+
+% Apêndice A
+\include{apendice}
+
+\end{document}
